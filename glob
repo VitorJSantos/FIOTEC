@@ -13,3 +13,42 @@ foreach (glob($pattern) as $file) {
 
     echo file_get_contents($file);
 }
+
+
+//glob para leitura de todos os arquivos da pasta
+
+/////////////////////
+
+
+
+
+01 | <?php
+02 |
+03 | function highlightFileWithLineNumbers($file)
+04 | {
+05 |     //Strip code and first span
+06 |     $code = substr(highlight_file($file, true), 36, -15);
+07 |     //Split lines
+08 |     $lines = explode("<br />", $code);
+09 |     //Count
+10 |     $lineCount = count($lines);
+11 |     //Calc pad length
+12 |     $padLength = strlen($lineCount);
+13 |
+14 |     //Re-Print the code and span again
+15 |     echo "<code><span style=\"color: #000000\">";
+16 |
+17 |     //Loop lines
+18 |     foreach ($lines as $i => $line) {
+19 |         //Create line number
+20 |         $lineNumber = str_pad($i + 1, $padLength, '0', STR_PAD_LEFT);
+21 |         //Print line
+22 |         echo sprintf('<br><span style="color: #999999">%s | </span>%s', $lineNumber, $line);
+23 |     }
+24 |
+25 |     //Close span
+26 |     echo "</span></code>";
+27 | }
+28 |
+29 | highlightFileWithLineNumbers($_GET["file"] ?? __FILE__);
+30 |
