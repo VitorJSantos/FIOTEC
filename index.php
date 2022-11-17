@@ -15,10 +15,10 @@ session_start(); //Inicializar a sessão com PHP
 			unset($_SESSION['msg']);
 		}
 		?>
-        <form method ="POST" action="basedados.php" enctype="multipart/form-data">
-            <label> Escolha o arquivo para ser importado ao banco de dados:</label><br>
-            <input type="file" name="arquivo"><br><br>	
-            <input type = "submit" value="Enviar para o Banco de dados">
-        </form>
+       // <form method ="POST" action="basedados.php" enctype="multipart/form-data">
+         //   <label> Escolha o arquivo para ser importado ao banco de dados:</label><br>
+        //    <input type="file" name="arquivo"><br><br>	
+          //  <input type = "submit" value="Enviar para o Banco de dados">
+      //  </form>
     </body>
 </html>
