@@ -1,0 +1,30 @@
+import sqlite3
+import os
+import io
+
+# Definindo o nome da pasta que contém os arquivos
+pasta = "pasta_com_arquivos_de_texto"
+
+# Definindo o nome do arquivo da base de dados
+nome_do_banco = "meu_banco_de_dados.db"
+
+# Criando uma conexão com o banco de dados
+conexao = sqlite3.connect(nome_do_banco)
+
+# Criando uma tabela para armazenar o conteúdo dos arquivos
+conexao.execute("CREATE TABLE IF NOT EXISTS arquivos (nome TEXT, conteudo TEXT)")
+
+# Percorrendo os arquivos da pasta
+for arquivo in os.listdir(pasta):
+    if arquivo.endswith(".txt"):
+        # Abrindo o arquivo
+        with io.open(os.path.join(pasta, arquivo), "r", encoding="utf-8") as f:
+            # Lendo o conteúdo do arquivo
+            conteudo = f.read()
+
+            # Armazenando o nome do arquivo e o seu conteúdo no banco de dados
+            conexao.execute("INSERT INTO arquivos (nome, conteudo) VALUES (?, ?)", (arquivo, conteudo))
+
+# Finalizando a conexão com o banco de dados
+conexao.commit()
+conexao.close()
